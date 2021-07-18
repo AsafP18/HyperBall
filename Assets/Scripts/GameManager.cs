@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     bool started;
     int diversitymanager;//makes sure no too many of same platform
     float height;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,23 +30,23 @@ public class GameManager : MonoBehaviour
         height = -30;
         floorlist = new List<GameObject>();
         CreateFloor();
-      
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time>timetrack&&PlayerMovement.gamerun==true)
+        if (Time.timeSinceLevelLoad >timetrack&&PlayerMovement.gamerun==true)
         {
-            timetrack =Time.time+timer;
+            timetrack =Time.timeSinceLevelLoad+timer;
             CreateFloor();
         }
-        if (PlayerMovement.gamerun == false&&Time.time>deletetimetrack)//if player didn't start the game after a few seconds
-            timetrack = Time.time;
-        if(Time.time>deletetimetrack+5&&PlayerMovement.gamerun==true)//deletes previous platforms
+        if (PlayerMovement.gamerun == false&&Time.timeSinceLevelLoad>deletetimetrack)//if player didn't start the game after a few seconds
+            timetrack = Time.timeSinceLevelLoad;
+        if(Time.timeSinceLevelLoad>deletetimetrack+5&&PlayerMovement.gamerun==true)//deletes previous platforms
         {
             Destroyfloors(floorlist);
-            deletetimetrack = Time.time + deletetimer;
+            deletetimetrack = Time.timeSinceLevelLoad + deletetimer;
         }
     }
     public void CreateFloor()
@@ -106,4 +107,5 @@ public class GameManager : MonoBehaviour
             floorlist.RemoveAt(0);
         }
     }
+
 }

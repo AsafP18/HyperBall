@@ -129,8 +129,8 @@ public class PlayerMovement : MonoBehaviour
             deathcount++;
             if (deathcount > 3)
             {
-                print("Dead");
                 Time.timeScale = 0;
+                ScoreManager.OpenLosePanel();
             }
         }
     }
