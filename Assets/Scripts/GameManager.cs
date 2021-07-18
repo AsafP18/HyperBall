@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     float deletetimer;
     float deletetimetrack;
     Vector3 pos;
-    List<GameObject> floorlist;
+    public static List<GameObject> floorlist;
     bool started;
     int diversitymanager;//makes sure no too many of same platform
     float height;
@@ -90,13 +90,19 @@ public class GameManager : MonoBehaviour
                    zpos = total++;
                else
                    zpos = total;*/
-            zpos += 35f;
+            zpos += 40f;
             height += rndheight;
-            float xpos = Random.Range(-18f, 18f);
+            float xpos = Random.Range(-35f, 35f);
             pos = new Vector3(xpos, height, zpos);
             floorlist.Add( Instantiate(spawnobj, pos, spawnobj.transform.localRotation));
             if (selecttype == 4)//to remove distance between target and next object
-                zpos -=15f ;
+                zpos -=5f ;
+            //failsafe if first method didn't work
+            if (PlayerMovement.GetYpos() < height)
+            {
+                PlayerMovement.StopGame();
+                print("stopped other way"); 
+            }
         }
     }
     public void Destroyfloors(List<GameObject> floors)

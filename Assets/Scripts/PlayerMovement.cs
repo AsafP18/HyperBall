@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float yvector;
     Vector3 Playermove;
     Vector3 Dir;
-    Rigidbody rb;
+    static Rigidbody rb;
     Vector3 movementposcam;
     float fallmultiplier;
     float airfallmultiplier;
@@ -127,10 +127,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "FallBox")
         {
             deathcount++;
-            if (deathcount > 3)
+            if (deathcount > 1)
             {
-                Time.timeScale = 0;
-                ScoreManager.OpenLosePanel();
+                StartCoroutine("StopGameDelay");
             }
         }
     }
@@ -149,5 +148,20 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(transform.forward + Vector3.up * 3 * speedupmulitplier, ForceMode.Impulse);
             source.PlayOneShot(RampClip);
         }
+    }
+    public static float GetYpos()
+    {
+        return rb.position.y;
+    }
+    public IEnumerator StopGameDelay()
+    {
+        yield return new WaitForSeconds(0.7f);
+        Time.timeScale = 0;
+        ScoreManager.OpenLosePanel();
+    }
+    public static void StopGame()
+    {
+        Time.timeScale = 0;
+        ScoreManager.OpenLosePanel();
     }
 }

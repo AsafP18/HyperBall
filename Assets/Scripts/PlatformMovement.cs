@@ -9,13 +9,13 @@ public class PlatformMovement : MonoBehaviour
     private void Awake()
     {
         int type = Random.Range(0, 2);
-        Speed = Random.Range(-0.1f, 0.1f);
+        Speed = Random.Range(-0.2f, 0.2f);
     }
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Speed, 0, 0);
-        if (transform.position.x > 20 || transform.position.x < -20)
+        if (transform.position.x > 40 || transform.position.x < -40)
             Speed *= -1;
         
     }
