@@ -8,7 +8,9 @@ public class ScoreManager : MonoBehaviour
     float scoretime;
     float scoretimer;
     static int score;
-    TextMeshProUGUI scoretext;
+    static TextMeshProUGUI scoretext;
+    static TextMeshProUGUI scoredisplay;//score that shows in the end
+    static TextMeshProUGUI highscoredisplay;
     static GameObject LosePanel;
     static string scorekey;
     void Start()
@@ -37,15 +39,19 @@ public class ScoreManager : MonoBehaviour
     public static void OpenLosePanel()
     {
         LosePanel.SetActive(true);
-        print(score);
+        scoretext.text = "";
+        scoredisplay = GameObject.Find("DisplayScore").GetComponent<TextMeshProUGUI>();
+        highscoredisplay = GameObject.Find("DisplayHighScore").GetComponent<TextMeshProUGUI>();
         if (PlayerPrefs.GetInt(scorekey) > score)
         {
-            print(PlayerPrefs.GetInt(scorekey));
+            scoredisplay.text = "Your Score: " + score;
+            highscoredisplay.text = "High Score: " + PlayerPrefs.GetInt(scorekey);
         }
         else
         {
-            print("High Score" + score);
             PlayerPrefs.SetInt(scorekey, score);
+            scoredisplay.text = "Your Score: " + score;
+            highscoredisplay.text = "New High Score!!!";
         }
     }
 

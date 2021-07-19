@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     AudioSource source;
     GameObject taptext;
     int deathcount;//how many passed back boxes
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         forwardspeed = 60;
         movementspeed = 5;
         rb = GetComponent<Rigidbody>();
+
         zvector = 0.6f;
         yvector = -1.35f;
         fallmultiplier = 11;
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Dir * forwardspeed;*/
             //makes sure ball doens't move continously after a side collision 
             if (rb.velocity.x > 0)
-                rb.velocity -= Vector3.right * 3;
+                rb.velocity += Vector3.left * 3;
 
             else if (rb.velocity.x < 0)
             {
@@ -136,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.tag == "Target")
             source.PlayOneShot(RampClip);
         else if (collision.gameObject.tag != "Ramp")

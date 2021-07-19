@@ -24,6 +24,6 @@ public class TargetJump : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player = other.gameObject;
-        player.GetComponent<Rigidbody>().AddForce(dir *jumpforce*15, ForceMode.Acceleration);
+        player.GetComponent<Rigidbody>().AddForce(dir *jumpforce*100, ForceMode.Acceleration);
     }
 }
