@@ -14,9 +14,12 @@ public class PlatformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Speed, 0, 0);
-        if (transform.position.x > 40 || transform.position.x < -40)
-            Speed *= -1;
+        if (Time.timeScale == 1)
+        {
+            transform.Translate(Speed, 0, 0);
+            if (transform.position.x > 40 || transform.position.x < -40)
+                Speed *= -1;
+        }
         
     }
 }
