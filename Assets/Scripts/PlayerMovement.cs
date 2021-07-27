@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnCollisionExit(Collision collision)
     {
-        InvokeRepeating("AddAirBonus", 2.2f, 0.7f);
+        InvokeRepeating("AddAirBonus", 2.2f, 0.2f);
         if (collision.gameObject.tag == "Ramp")
         {
             rb.AddForce(transform.forward + Vector3.up * 3 * speedupmulitplier, ForceMode.Impulse);
@@ -144,7 +144,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void AddAirBonus()
     {
-        airbonus += 55;
+        airbonus += 25;
+        print(airbonus);
     }
     void StopAirBonus()
     {
