@@ -13,10 +13,12 @@ public class ScoreManager : MonoBehaviour
     static TextMeshProUGUI highscoredisplay;
     static GameObject LosePanel;
     static string scorekey;
+    static TextMeshProUGUI AirBonustxt;
     void Start()
     {
         scoretimer = 0.5f;
         scoretext = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+        AirBonustxt = GameObject.Find("AirBonusTxt").GetComponent<TextMeshProUGUI>();
         LosePanel = GameObject.Find("LosePanel");
         LosePanel.SetActive(false);
         scorekey = "HighScore";
@@ -52,6 +54,17 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt(scorekey, score);
             scoredisplay.text = "Your Score: " + score;
             highscoredisplay.text = "New High Score!!!";
+            
+        }
+    }
+    public IEnumerator AddAirScore(int airbonus)
+    {
+        if (airbonus > 0)
+        {
+            AirBonustxt.text = "Air Bonus +" + airbonus;         
+            score += airbonus;
+            yield return new WaitForSeconds(1.2f);
+            AirBonustxt.text = "";
         }
     }
 

@@ -1957,7 +1957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 14, y: 656}
+  m_AnchoredPosition: {x: 14, y: 695}
   m_SizeDelta: {x: 306.2, y: 78.093994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1067356113
@@ -2006,7 +2006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 782488242}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: StopPause
+        m_MethodName: RestartFunc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2216,7 +2216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -92.32025, y: -77.77234}
+  m_AnchoredPosition: {x: -98, y: -117}
   m_SizeDelta: {x: 91.3675, y: 86.0664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1282864462
@@ -7516,6 +7516,8 @@ MonoBehaviour:
   yvector: 0
   jumpclip: {fileID: 8300000, guid: 0f50d2dce33176c4cb2db58304666b00, type: 3}
   RampClip: {fileID: 8300000, guid: dfd2eeceda29338439ff57565433425d, type: 3}
+  airbonus: 0
+  SCmanager: {fileID: 2038114195}
 --- !u!54 &1869208984
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12499,12 +12501,12 @@ GameObject:
   - component: {fileID: 2080549858}
   - component: {fileID: 2080549857}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AirBonusTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2080549856
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12521,7 +12523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -99, y: -56}
+  m_AnchoredPosition: {x: -22, y: -76}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2080549857
@@ -12544,7 +12546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Air bonus
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -12553,8 +12555,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4285578239
+  m_fontColor: {r: 1, g: 0.73320013, b: 0.4377358, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12571,8 +12573,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12607,7 +12609,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -203.43944, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12657,7 +12659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.002, y: 104.6}
+  m_AnchoredPosition: {x: 14.002, y: 107}
   m_SizeDelta: {x: 306.2034, y: 78.094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2099337495

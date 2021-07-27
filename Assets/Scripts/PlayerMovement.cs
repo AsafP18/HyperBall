@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour
     AudioSource source;
     GameObject taptext;
     int deathcount;//how many passed back boxes
-
+    //score
+    public int airbonus;//bonus score for staying in air
+    public ScoreManager SCmanager;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         forwardspeed = 60;
         movementspeed = 5;
         rb = GetComponent<Rigidbody>();
-
+        airbonus = 0;
         zvector = 0.6f;
         yvector = -1.35f;
         fallmultiplier = 11;
@@ -102,18 +104,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2);
         rb.velocity -= Vector3.forward * speedupmulitplier;
     }
-    /*    IEnumerator Jump()
-        {
-            zvector = 1.03f;
-            yvector = -0.3f;
-            yield return new WaitForSeconds(0.2f);
-            yvector = -0.6f;
-            yield return new WaitForSeconds(0.2f);
-            zvector = 1.6f;
-            yvector = -1.35f;
-
-
-        }*/
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "plane")
@@ -123,7 +113,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.gameObject.tag == "Arrow")
         {
-
             StartCoroutine("Speedup");
         }
         if (other.gameObject.tag == "FallBox")
@@ -138,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        StopAirBonus();
         if (collision.gameObject.tag == "Target")
             source.PlayOneShot(RampClip);
         else if (collision.gameObject.tag != "Ramp")
@@ -146,12 +135,25 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnCollisionExit(Collision collision)
     {
+        InvokeRepeating("AddAirBonus", 2.2f, 0.7f);
         if (collision.gameObject.tag == "Ramp")
         {
             rb.AddForce(transform.forward + Vector3.up * 3 * speedupmulitplier, ForceMode.Impulse);
             source.PlayOneShot(RampClip);
         }
     }
+    void AddAirBonus()
+    {
+        airbonus += 55;
+    }
+    void StopAirBonus()
+    {
+        CancelInvoke();
+        SCmanager.StartCoroutine("AddAirScore", airbonus);
+        airbonus = 0;
+    }
+    
+
     public static float GetYpos()
     {
         return rb.position.y;
