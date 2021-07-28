@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
     static TextMeshProUGUI AirBonustxt;
     void Start()
     {
-        scoretimer = 0.5f;
+        scoretimer = 0.15f;
         scoretext = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
         AirBonustxt = GameObject.Find("AirBonusTxt").GetComponent<TextMeshProUGUI>();
         LosePanel = GameObject.Find("LosePanel");
@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviour
         {
             if(Time.time>scoretime)
             {
-                score += 30;
+                score += 7;
                 scoretime = Time.time + scoretimer;
                 scoretext.text = score.ToString();
             }
