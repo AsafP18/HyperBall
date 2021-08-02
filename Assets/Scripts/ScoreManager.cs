@@ -13,16 +13,20 @@ public class ScoreManager : MonoBehaviour
     static TextMeshProUGUI highscoredisplay;
     static GameObject LosePanel;
     static string scorekey;
-    static TextMeshProUGUI AirBonustxt;
+    static TextMeshProUGUI Bonustxt;
+    bool AirScoreActive;//lets know if displaying air bonus to add line to coin bonus
+    bool CoinScoreActive;//lets know if displaying coin bonus to add line to air bonus
     void Start()
     {
         scoretimer = 0.15f;
         scoretext = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
-        AirBonustxt = GameObject.Find("AirBonusTxt").GetComponent<TextMeshProUGUI>();
+        Bonustxt = GameObject.Find("BonusTxt").GetComponent<TextMeshProUGUI>();
         LosePanel = GameObject.Find("LosePanel");
         LosePanel.SetActive(false);
         scorekey = "HighScore";
         score = 0;
+        AirScoreActive = false;
+        CoinScoreActive = false;
     }
 
     // Update is called once per frame
@@ -61,11 +65,29 @@ public class ScoreManager : MonoBehaviour
     {
         if (airbonus > 0)
         {
-            AirBonustxt.text = "Air Bonus +" + airbonus;         
+            AirScoreActive = true;
+            if (CoinScoreActive)
+                Bonustxt.text = "Air Bonus +" + airbonus;
+            else
+                Bonustxt.text += "\nAir Bonus +" + airbonus;
             score += airbonus;
             yield return new WaitForSeconds(1.2f);
-            AirBonustxt.text = "";
+            Bonustxt.text = "";
+            AirScoreActive = false;
         }
+    }
+    public IEnumerator AddCoinBonus()
+    {
+        CoinScoreActive = true;
+        score += 50;
+        if (AirScoreActive)
+            Bonustxt.text += "\nCoin Bonus +50 ";
+        else
+            Bonustxt.text = "Coin Bonus +50";
+        yield return new WaitForSeconds(1.2f);
+        Bonustxt.text = "";
+        CoinScoreActive = false;
+
     }
 
 }

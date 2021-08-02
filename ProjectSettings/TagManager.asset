@@ -13,6 +13,7 @@ TagManager:
   - RampRoad
   - Target
   - FallBox
+  - Coin
   layers:
   - Default
   - TransparentFX

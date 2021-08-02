@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     //score
     public int airbonus;//bonus score for staying in air
     public ScoreManager SCmanager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.gameObject.tag == "Arrow")
         {
-            StartCoroutine("Speedup");
+            StartCoroutine(Speedup());
         }
         if (other.gameObject.tag == "FallBox")
         {
@@ -145,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
     void AddAirBonus()
     {
         airbonus += 25;
-        print(airbonus);
     }
     void StopAirBonus()
     {
