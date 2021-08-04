@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     //sound
     public AudioClip jumpclip;
     public AudioClip RampClip;
+    bool isplaying;
     AudioSource source;
     GameObject taptext;
     int deathcount;//how many passed back boxes
@@ -129,10 +130,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         StopAirBonus();
-        if (collision.gameObject.tag == "Target")
-            source.PlayOneShot(RampClip);
-        else if (collision.gameObject.tag != "Ramp")
-            source.PlayOneShot(jumpclip);
+        if (collision.gameObject.tag == "Target" && isplaying == false)
+            StartCoroutine(PlaySound(RampClip));
+        else if (collision.gameObject.tag != "Ramp" && isplaying == false)
+            StartCoroutine(PlaySound(jumpclip));
     }
     public void OnCollisionExit(Collision collision)
     {
@@ -143,6 +144,13 @@ public class PlayerMovement : MonoBehaviour
             source.PlayOneShot(RampClip);
         }
     }
+    IEnumerator PlaySound(AudioClip clip)
+    {
+        isplaying = true;
+        source.PlayOneShot(clip);
+        yield return new WaitForSeconds(1);
+        isplaying = false;
+    }    
     void AddAirBonus()
     {
         airbonus += 25;
