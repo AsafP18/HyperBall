@@ -27,13 +27,13 @@ public class PlayerMovement : MonoBehaviour
     //score
     public int airbonus;//bonus score for staying in air
     public ScoreManager SCmanager;
-
+    public static bool isDead;
     // Start is called before the first frame update
     void Start()
     {
         gamerun = false;
         forwardspeed = 60;
-        movementspeed = 5;
+        movementspeed = 7;
         rb = GetComponent<Rigidbody>();
         airbonus = 0;
         zvector = 0.6f;
@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         speedupmulitplier = 5f;
         source = GameObject.Find("SoundManager").GetComponent<AudioSource>();
         taptext = GameObject.Find("TapText");
+        isDead = false;
 
     }
 
@@ -117,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Speedup());
         }
+        //when falling to end game
         if (other.gameObject.tag == "FallBox")
         {
             deathcount++;
@@ -169,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public IEnumerator StopGameDelay()
     {
+        isDead = true;
         yield return new WaitForSeconds(0.7f);
         Time.timeScale = 0;
         ScoreManager.OpenLosePanel();

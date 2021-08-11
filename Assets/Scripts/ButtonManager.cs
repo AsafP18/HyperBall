@@ -22,8 +22,11 @@ public class ButtonManager : MonoBehaviour
 
     public void PauseClick()
     {
-        PausePnl.SetActive(true);
-        Time.timeScale = 0;
+        if (!PlayerMovement.isDead)
+        {
+            PausePnl.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
     public void StopPause()
     {
